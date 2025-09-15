@@ -92,29 +92,125 @@ body::after {
     padding: 40px 0;
 }
 
-.logo h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    animation: glow 2s ease-in-out infinite alternate;
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-@keyframes glow {
+.logo-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d4aa, #00a8cc, #667eea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: logoRotate 4s linear infinite;
+    box-shadow: 
+        0 0 30px rgba(0, 212, 170, 0.5),
+        0 0 60px rgba(0, 168, 204, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.logo-circle::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #00d4aa, #00a8cc, #667eea, #00d4aa);
+    z-index: -1;
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.logo-text {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    animation: logoTextGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoTextGlow {
+    from {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(0, 212, 170, 0.4);
+    }
+}
+
+.company-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: companyNameGlow 2s ease-in-out infinite alternate;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.company-name::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00d4aa, transparent);
+    border-radius: 2px;
+    animation: underlineGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes companyNameGlow {
     from {
         text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
     to {
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(120, 119, 198, 0.3);
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(0, 212, 170, 0.3);
     }
 }
 
-.website {
-    font-size: 1.2rem;
-    color: #ccc;
-    font-weight: 300;
-    letter-spacing: 1px;
+@keyframes underlineGlow {
+    from {
+        box-shadow: 0 0 5px rgba(0, 212, 170, 0.5);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(0, 212, 170, 0.8), 0 0 25px rgba(0, 168, 204, 0.4);
+    }
 }
 
 /* Main content */
@@ -258,12 +354,17 @@ body::after {
         padding: 10px;
     }
     
-    .logo h1 {
-        font-size: 2.2rem;
+    .logo-circle {
+        width: 100px;
+        height: 100px;
     }
     
-    .website {
-        font-size: 1rem;
+    .logo-text {
+        font-size: 1.6rem;
+    }
+    
+    .company-name {
+        font-size: 2rem;
     }
     
     .business-card {
@@ -292,8 +393,17 @@ body::after {
 }
 
 @media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1.8rem;
+    .logo-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .logo-text {
+        font-size: 1.3rem;
+    }
+    
+    .company-name {
+        font-size: 1.6rem;
     }
     
     .business-card {
